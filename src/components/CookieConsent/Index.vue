@@ -33,7 +33,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { useCookie } from 'nuxt'
+  import { useCookie } from '#imports'
 
   // Create a ref for tracking cookie consent
   const cookiesAccepted = ref(false)

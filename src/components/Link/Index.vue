@@ -1,0 +1,3 @@
+<template>
+  <NuxtLink></NuxtLink>
+</template>

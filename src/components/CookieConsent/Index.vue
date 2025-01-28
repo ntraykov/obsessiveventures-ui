@@ -7,7 +7,7 @@
       Този сайт използва бисквитки, за да подобри вашето изживяване. За повече
       информация вижте нашата
       <NuxtLink
-        to="/politika-za-biskvitki"
+        :to="cookiePolicyUrl"
         class="underline text-green-400 hover:text-green-300"
       >
         Политика за бисквитки
@@ -35,7 +35,18 @@
   import { ref } from 'vue'
   import { useCookie } from '#imports'
 
-  // Create a ref for tracking cookie consent
+  const { gtag } = defineProps({
+    cookiePolicyUrl: {
+      type: String,
+      default: '/cookie-policy',
+    },
+    gtag: {
+      type: String,
+      required: true,
+    },
+  })
+
+  // Create a ref for tracking cookie consentgp
   const cookiesAccepted = ref(false)
 
   // Initialize cookie management
@@ -68,7 +79,7 @@
       // Load Google Analytics script
       const script = document.createElement('script')
       script.async = true
-      script.src = `https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX` // Replace with your Google Analytics ID
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${gtag}` // Replace with your Google Analytics ID
       document.head.appendChild(script)
 
       script.onload = () => {
@@ -77,7 +88,7 @@
           window.dataLayer.push(arguments)
         }
         gtag('js', new Date())
-        gtag('config', 'G-XXXXXXXXXX') // Replace with your Google Analytics ID
+        gtag('config', gtag)
       }
     }
   }
